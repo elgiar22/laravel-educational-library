@@ -1,6 +1,6 @@
 # 📚 Laravel Educational Library
 
-A comprehensive educational library management system built with Laravel 12, featuring advanced role-based access control (RBAC), modern UI/UX design with dark mode support, robust book management capabilities, and OWASP Top 10 2021 security compliance.
+Manage an educational library with Laravel 12. Readers can browse and download PDFs according to their permissions, authors can manage their books, and administrators can manage users, categories and author requests.
 
 ## ✨ Features
 
@@ -65,8 +65,8 @@ A comprehensive educational library management system built with Laravel 12, fea
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/Laravel_Educational_Library.git
-cd Laravel_Educational_Library
+git clone https://github.com/elgiar22/laravel-educational-library.git
+cd laravel-educational-library
 ```
 
 2. **Install dependencies**
@@ -88,15 +88,16 @@ DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=laravel_educational_library
-DB_USERNAME=root
-DB_PASSWORD=
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
 ```
 
-5. **Run migrations and seeders**
+5. **Run migrations**
 ```bash
 php artisan migrate
-php artisan db:seed
 ```
+
+To populate a local demo database, use `php artisan db:seed`. Run `php artisan storage:link` to serve files from the public storage disk.
 
 6. **Build assets**
 ```bash
@@ -110,15 +111,9 @@ php artisan serve
 
 Visit `http://localhost:8000` to see your application!
 
-## 👤 Default Users
+## Local demo accounts
 
-After running the seeders, you'll have these default users:
-
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@example.com | password |
-| Author | author@example.com | password |
-| User | user@example.com | password |
+The [database seeders](database/seeders/) define sample accounts for testing the local application. Use their demo credentials only in a disposable development database. Create separate accounts with unique passwords for deployed environments.
 
 ## 🛠️ Technology Stack
 
@@ -130,36 +125,24 @@ After running the seeders, you'll have these default users:
 - **Styling**: Custom CSS with CSS variables
 - **JavaScript**: Vanilla JavaScript for interactions
 - **PDF Handling**: Browser-based PDF viewer
-- **Security**: OWASP Top 10 2021 compliance with comprehensive logging
+- **Security**: Role middleware, input validation, security headers and event logging
 - **Rate Limiting**: Multi-level rate limiting system
 - **Notifications**: Laravel notification system
 
 ## 🔒 Security Features
 
-### **OWASP Top 10 2021 Compliance** ✅
-- **A01:2021 – Broken Access Control**: Comprehensive middleware protection
-- **A02:2021 – Cryptographic Failures**: bcrypt password hashing
-- **A03:2021 – Injection**: Eloquent ORM with parameterized queries
-- **A04:2021 – Insecure Design**: Multi-level rate limiting system
-- **A05:2021 – Security Misconfiguration**: Proper environment configuration
-- **A06:2021 – Vulnerable Components**: Latest Laravel 12 with updated dependencies
-- **A07:2021 – Authentication Failures**: Secure token-based password reset
-- **A08:2021 – Software Integrity**: Strict file upload validation
-- **A09:2021 – Logging Failures**: Comprehensive security logging
-- **A10:2021 – SSRF**: No external HTTP requests
+- Role and ownership checks for protected operations
+- Password hashing and token-based password reset
+- HTTP security headers and request rate limiting
+- File type and size validation for uploads
+- Logging for selected authentication and authorization events
 
-### **Enhanced Security Measures**
-- **Security Logging**: Complete audit trail for all user actions
-- **Rate Limiting**: Multi-level rate limiting (6/min auth, 3/min author requests, 10/min admin)
-- **Security Headers**: Comprehensive HTTP security headers
-- **Input Validation**: Strong password complexity requirements
-- **File Upload Security**: Strict MIME type and size validation
-- **Session Security**: Proper session management and cleanup
+See the [backend analysis](BACKEND_ANALYSIS_REPORT.md) for implementation details and open security recommendations.
 
 ## 📁 Project Structure
 
 ```
-Laravel_Educational_Library/
+laravel-educational-library/
 ├── app/
 │   ├── Http/Controllers/
 │   │   ├── AdminController.php      # Admin dashboard and user management
@@ -260,9 +243,8 @@ Laravel_Educational_Library/
 - Multi-level rate limiting (6/min auth, 3/min author requests, 10/min admin)
 - Security headers middleware
 - Custom password reset notifications
-- OWASP Top 10 2021 compliance
 
-## 🚀 API Endpoints
+## 🚀 Web Routes
 
 ### Authentication
 - `GET /register` - Registration form
