@@ -113,7 +113,7 @@ Visit `http://localhost:8000` to see your application!
 
 ## Local demo accounts
 
-The [database seeders](database/seeders/) define sample accounts for testing the local application. Use their demo credentials only in a disposable development database. Create separate accounts with unique passwords for deployed environments.
+The [database seeder](database/seeders/DatabaseSeeder.php) adds categories. Its sample user creation code is commented out. For a local demo, register a test account in the application and use those credentials only in your development database. Use unique credentials for deployed environments.
 
 ## 🛠️ Technology Stack
 
